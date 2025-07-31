@@ -11,15 +11,22 @@ const Student = lazy(() => import("./student-layout/student"));
 const ProtectChildrem = lazy(() => import("./protect-route/layout-protect"));
 const LoginChildren = lazy(() => import("./protect-route/login-protect"));
 const Branch = lazy(() => import("./branch/branch"));
-const Worker = lazy(() => import("./worker/worker"));
-const Reducer = lazy(() => import("./worker/useReducer"));
 const SingleGroup = lazy(() => import("./groups/single-group"));
 const Notfoun = lazy(() => import("./not-found/notfound"));
 const Room = lazy(() => import("./rooms/room"));
-const StarryNight = lazy(() => import("./night/night"));
 const TeacherLayout = lazy(() => import("./teacher-layout/teacher-layout"));
 const GroupStudent = lazy(() => import("./teacher-group/group-students"));
 const TeacherGroup = lazy(() => import("./teacher-group/teacher-groups"));
+const AdminProfile = lazy(() => import("./admin-layout/admin-page"));
+
+
+// ------------------------------------------------
+const Worker = lazy(() => import("./worker/worker"));
+const Reducer = lazy(() => import("./worker/useReducer"));
+const StarryNight = lazy(() => import("./night/night"));
+// ------------------------------------------------
+
+
 
 export {
   SignIn,
@@ -39,7 +46,13 @@ export {
   TeacherLayout,
   GroupStudent,
   TeacherGroup,
+  AdminProfile,
+
+
+
+  // ------------------------------------------------
   Worker,
   Reducer,
   StarryNight,
+  // ------------------------------------------------
 };

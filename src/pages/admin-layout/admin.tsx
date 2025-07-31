@@ -6,7 +6,6 @@ import {
   TeamOutlined,
   UserOutlined,
   HomeOutlined,
-  SettingOutlined,
   LogoutOutlined,
   AppstoreOutlined,
 } from "@ant-design/icons";
@@ -55,14 +54,9 @@ const Admin: React.FC = () => {
 
   const userMenuItems: MenuProps["items"] = [
     {
-      key: "profile",
+      key: "/admin/profile",
       icon: <UserOutlined />,
-      label: "Profile",
-    },
-    {
-      key: "settings",
-      icon: <SettingOutlined />,
-      label: "Settings",
+      label: <Link to="/admin/profile">Profile</Link>,
     },
     {
       type: "divider" as const,
@@ -77,6 +71,8 @@ const Admin: React.FC = () => {
       },
     },
   ];
+
+
 
   return (
     <Layout hasSider style={{ minHeight: "100vh" }}>
