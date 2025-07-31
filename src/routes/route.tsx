@@ -61,7 +61,6 @@ const Router = () => {
           <Route path="group/:id" element={<SingleGroup />}></Route>
           <Route path="rooms" element={<Room />}></Route>
         </Route>
-          <Route path="reducer" element={<Reducer />}></Route>
 
         <Route
           path="teacher/"
@@ -72,10 +71,11 @@ const Router = () => {
           }
         >
           <Route path="profile" element={<TeacherProfile />} />
-          <Route path="group-student" element={<GroupStudent />} />
+          <Route path="group-student/:id" element={<GroupStudent />} />
           <Route path="teacher-group" element={<TeacherGroups />} />
         </Route>
 
+        <Route path="reducer" element={<Reducer />}></Route>
         <Route path="nightt" element={<StarryNight />}></Route>
         <Route path="worker" element={<Worker />}></Route>
         <Route path="*" element={<Notfoun />}></Route>

@@ -1,10 +1,16 @@
 import React from "react";
-import { Modal, Input, Form as AntForm, Button, Select, Spin } from "antd";
+import {
+  Modal,
+  Input,
+  Form as AntForm,
+  Button,
+  Select,
+  Spin,
+} from "antd";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import type { Branch, Teacher } from "@types";
 import { MaskedInput } from "antd-mask-input";
-import { useBranch } from "@hooks";
-import { useCreateTeacher, useUpdateTeacher } from "../../hooks/useTeacher";
+import { useBranch, useTeachers } from "@hooks";
 import { TeacherValidation } from "@utils";
 interface TeacherModalProps {
   visible: boolean;
@@ -25,8 +31,9 @@ const TeacherModal: React.FC<TeacherModalProps> = ({
 
   const { data: branchData, isLoading } = useBranch();
   const branches: Branch[] = branchData?.data?.branch || [];
-  const { mutate: createFn } = useCreateTeacher();
-  const { mutate: updateFn } = useUpdateTeacher();
+const { useCreateTeacher, useUpdateTeacher } = useTeachers();
+
+
 
   const initialValues: Teacher = {
     first_name: editData?.first_name || "",
@@ -39,27 +46,23 @@ const TeacherModal: React.FC<TeacherModalProps> = ({
   };
 
   const handleSubmit = async (values: Teacher) => {
-    const { password, ...rest } = values;
-    const payload: any = {
-      ...rest,
-      ...(isEdit ? {} : { password }),
-    };
-
-    console.log("Submitting form:", payload);
-
-    try {
-      if (isEdit && editData?.id) {
-        console.log("Calling updateFn");
-        updateFn({ model: payload, id: editData.id });
-      } else {
-        console.log("Calling createFn");
-        createFn(payload);
-      }
-      onClose();
-    } catch (error) {
-      console.error("Submission error:", error);
-    }
+  const { password, ...rest } = values;
+  const payload: any = {
+    ...rest,
+    ...(isEdit ? {} : { password }),
   };
+
+  try {
+    if (isEdit && editData?.id) {
+      useUpdateTeacher.mutate({ model: payload, id: editData.id }); // ✅
+    } else {
+      useCreateTeacher.mutate(payload); // ✅
+    }
+    onClose();
+  } catch (error) {
+    console.error("Submission error:", error);
+  }
+};
 
   return (
     <Modal

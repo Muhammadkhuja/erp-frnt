@@ -19,12 +19,12 @@ const items: MenuProps["items"] = [
   {
     key: "/teacher/group-student",
     icon: <AppstoreOutlined />,
-    label: <Link to="/teacher/group-student">Group student</Link>,
+    label: <Link to="/teacher/teacher-group/">Group student</Link>,
   },
   {
     key: "/teacher/teacher-group",
     icon: <TeamOutlined />,
-    label: <Link to="/teacher/teacher-group">Teacher group</Link>,
+    label: <Link to="/#">Teacher group</Link>,
   },
   // {
   //   key: "/#",

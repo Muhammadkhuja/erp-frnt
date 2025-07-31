@@ -17,7 +17,7 @@ export const TeacherService = {
   },
 
   async getTeacherGroups() {
-    const res = await apiConfig().getRequest(ApiUrls.GROUPS);
+    const res = await apiConfig().getRequest(`${ApiUrls.GROUP_TEACHERS}/my-groups`);
     return res;
   },
 

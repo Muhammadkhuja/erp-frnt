@@ -1,8 +1,8 @@
-import { useTeacher } from "@hooks";
+import { useTeachers } from "@hooks";
 import { Descriptions } from "antd";
 import dayjs from "dayjs";
 function TeacherProfile() {
-  const { data } = useTeacher();
+  const { data } = useTeachers();
   const admin = data?.data;
   console.log(data);
   return (

@@ -1,84 +1,81 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { TeacherService } from "@service";
-import type { Teacher } from "@types";
-import { message } from "antd";
+import { TeacherService } from "../service/teacher.service";
 
-// ✅ GET: list of teachers
-export const useTeachers = (params: any) => {
-  return useQuery({
-    queryKey: ["teacher", params],
-    queryFn: async () => {
-      const res = await TeacherService.getTeachers(params);
-      return res;
-    },
-  });
-};
-
-// ✅ CREATE
-export const useCreateTeacher = () => {
+export const useTeachers = (params?: any, id?: number) => {
   const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: async (data: Teacher) => TeacherService.createTeacher(data),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["teacher"] });
-    },
-    onError: () => {
-      message.error("Failed to create teacher");
-    },
-  });
-};
 
-// ✅ UPDATE
-export const useUpdateTeacher = () => {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: async ({ model, id }: { model: Teacher; id: number }) =>
-      TeacherService.updateTeacher(model, id),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["teacher"] });
-    },
-    onError: () => {
-      message.error("Failed to update teacher");
-    },
-  });
-};
-
-// ✅ DELETE
-export const useDeleteTeacher = () => {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: async (id: number) => TeacherService.deleteTeacher(id),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["teacher"] });
-    },
-    onError: () => {
-      message.error("Failed to delete teacher");
-    },
-  });
-};
-
-// ✅ SINGLE teacher with groups & students
-export const useTeacher = (id?: number) => {
+  // 1. Teacher ma'lumotlarini olish
   const { data } = useQuery({
-    enabled: !id,
+    enabled: !!params,
+    queryKey: ["teacher", params],
+    queryFn: () => TeacherService.getTeachers(params),
+  });
+
+  // 2. Teacher'ga biriktirilgan guruhlar ro'yxatini olish
+  const {
+    data: teacherGroupsData,
+    isLoading: isLoadingGroups,
+    isError: isGroupsError,
+  } = useQuery({
+    enabled: id === undefined, // id bo'lmasa, teacherGroups olib kelinadi
     queryKey: ["teacher-groups"],
-    queryFn: async () => TeacherService.getTeacherGroups(),
+    queryFn: () => TeacherService.getTeacherGroups(),
   });
 
-    // const { data: profile } = useQuery({
-    //   queryKey: ["teacher"],
-    //   queryFn: async () => TeacherService.teacherProfile(),
-    // });
+  const teacherGroups = teacherGroupsData?.data || [];
 
-  const { data: students } = useQuery({
+  // 3. Teacher guruhining studentlarini olish
+  const {
+    data: groupStudentsData,
+    isLoading: isLoadingStudents,
+    isError: isStudentsError,
+  } = useQuery({
     enabled: !!id,
-    queryKey: ["teacher-group-students"],
-    queryFn: async () => TeacherService.getTeacherGroupById(id!),
+    queryKey: ["teacher-group-students", id],
+    queryFn: () => TeacherService.getTeacherGroupById(id!),
   });
 
-  return {
-    data,
-    students,
-    // profile,
+  // 4. Teacher yaratish
+  const useTeacherCreate = () => {
+    return useMutation({
+      mutationFn: (data: any) => TeacherService.createTeacher(data),
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["teacher"] });
+      },
+    });
   };
+
+  // 5. Teacher yangilash
+  const useTeacherUpdate = () => {
+    return useMutation({
+      mutationFn: ({ id, model }: { id: number; model: any }) =>
+        TeacherService.updateTeacher(model, id),
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["teacher"] });
+      },
+    });
+  };
+
+  // 6. Teacher o‘chirish
+  const useDeleteTeacher = () => {
+    return useMutation({
+      mutationFn: (id: number) => TeacherService.deleteTeacher(id),
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["teacher"] });
+      },
+    });
+  };
+return {
+  data,
+  teacherGroups,
+  students: groupStudentsData,
+  isLoadingGroups,
+  isGroupsError,
+  isLoadingStudents,
+  isStudentsError,
+  useCreateTeacher: useTeacherCreate(), // hookni ichida chaqirdik
+  useUpdateTeacher: useTeacherUpdate(),
+  useDeleteTeacher: useDeleteTeacher(),
+};
+
 };

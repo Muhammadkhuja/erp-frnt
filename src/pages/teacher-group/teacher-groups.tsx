@@ -1,13 +1,61 @@
-import { useTeacher } from "@hooks";
+import { Table, Tag } from "antd";
+import { useTeachers } from "../../hooks";
+import dayjs from "dayjs";
+import { useNavigate } from "react-router-dom";
 
-const TeacherGroups = () => {
-  const { data } = useTeacher();
-  console.log(data);
+const TeachersGroups = () => {
+  const { teacherGroups } = useTeachers();
+  const navigate = useNavigate()
+  console.log(teacherGroups);
+
+  const columns = [
+    {
+      title: "Group Name",
+      dataIndex: ["group", "name"],
+      key: "name",
+    },
+    {
+      title: "Start Date",
+      dataIndex: "start_date",
+      key: "start_date",
+      render: (date: string) => dayjs(date).format("YYYY-MM-DD"),
+    },
+    {
+      title: "End Date",
+      dataIndex: "end_date",
+      key: "end_date",
+      render: (date: string) => dayjs(date).format("YYYY-MM-DD"),
+    },
+    {
+      title: "Status",
+      dataIndex: "status",
+      key: "status",
+      render: (status: boolean) =>
+        status ? (
+          <Tag color="green">Active</Tag>
+        ) : (
+          <Tag color="red">Inactive</Tag>
+        ),
+    },
+  ];
+
   return (
-    <div>
-      <h1>Helllo uzbbbbbbbbbbb</h1>
+    <div style={{ padding: 24 }}>
+      <h2 style={{ marginBottom: 16 }}>My Groups</h2>
+      <Table
+        columns={columns}
+        dataSource={teacherGroups || []}
+        rowKey="id"
+        bordered
+        pagination={false}
+        onRow={(record:any) => ({
+          onClick: () => {
+            navigate(`/teacher/group-student/${record.group.id}`);
+          },
+        })}
+      />
     </div>
   );
 };
 
-export default TeacherGroups;
+export default TeachersGroups;

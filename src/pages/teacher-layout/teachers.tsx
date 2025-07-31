@@ -4,7 +4,7 @@ import type { Teacher } from "@types";
 import TeacherModal from "./teacher-modal";
 import { PopConfirm, TeacherColumns } from "@components";
 import { useLocation } from "react-router-dom";
-import { useGeneral, useTeachers, useDeleteTeacher } from "@hooks";
+import { useGeneral, useTeachers } from "@hooks";
 import { EditOutlined } from "@ant-design/icons";
 
 function TeacherPage() {
@@ -17,6 +17,7 @@ function TeacherPage() {
   });
 
   const location = useLocation();
+const { useDeleteTeacher } = useTeachers(params);
 
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
@@ -32,7 +33,7 @@ function TeacherPage() {
 
   const { data } = useTeachers(params);
   const { handlePagination } = useGeneral();
-  const { mutate: deleteFn, isPending: isDeleting } = useDeleteTeacher();
+  const { mutate: deleteFn, isPending: isDeleting } = useDeleteTeacher;
 
   const deleteItem = (id: number) => {
     deleteFn(id);
