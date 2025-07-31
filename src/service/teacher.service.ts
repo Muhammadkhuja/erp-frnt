@@ -7,6 +7,25 @@ export const TeacherService = {
     const res = await apiConfig().getRequest(ApiUrls.TEACHER, params);
     return res;
   },
+
+  async setImage(data: FormData, id: number) {
+    const res = await apiConfig().postRequest(
+      `${ApiUrls.TEACHER}/${id}/avatar`,
+      data
+    );
+    return res;
+  },
+
+  async getTeacherGroups() {
+    const res = await apiConfig().getRequest(ApiUrls.GROUPS);
+    return res;
+  },
+
+  async getTeacherGroupById(id: number) {
+    const res = await apiConfig().getRequest(`${ApiUrls.GROUPS}/${id}/teacher`);
+    return res;
+  },
+
   async createTeacher(model: Teacher) {
     const res = await apiConfig().postRequest(ApiUrls.TEACHER, model);
     return res;
@@ -20,6 +39,11 @@ export const TeacherService = {
   },
   async deleteTeacher(id: number) {
     const res = await apiConfig().deleteRequest(`${ApiUrls.TEACHER}/${id}`);
+    return res;
+  },
+
+  async teacherProfile() {
+    const res = await apiConfig().getRequest(`teacher/profile`);
     return res;
   },
 };

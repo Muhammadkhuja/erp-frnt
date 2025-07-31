@@ -16,8 +16,9 @@ const Notfoun = lazy(() => import("./not-found/notfound"));
 const Room = lazy(() => import("./rooms/room"));
 const TeacherLayout = lazy(() => import("./teacher-layout/teacher-layout"));
 const GroupStudent = lazy(() => import("./teacher-group/group-students"));
-const TeacherGroup = lazy(() => import("./teacher-group/teacher-groups"));
+const TeacherGroups = lazy(() => import("./teacher-group/teacher-groups"));
 const AdminProfile = lazy(() => import("./admin-layout/admin-page"));
+const TeacherProfile = lazy(() => import("./teacher-layout/teacher-page"));
 
 
 // ------------------------------------------------
@@ -45,8 +46,10 @@ export {
   Room,
   TeacherLayout,
   GroupStudent,
-  TeacherGroup,
+  TeacherGroups,
   AdminProfile,
+  TeacherProfile,
+  
 
 
 

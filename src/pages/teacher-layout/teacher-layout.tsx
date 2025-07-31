@@ -6,7 +6,6 @@ import {
   TeamOutlined,
   UserOutlined,
   // HomeOutlined,
-  SettingOutlined,
   LogoutOutlined,
   AppstoreOutlined,
 } from "@ant-design/icons";
@@ -18,14 +17,14 @@ const { Header, Content, Footer, Sider } = Layout;
 
 const items: MenuProps["items"] = [
   {
-    key: "/group-student",
+    key: "/teacher/group-student",
     icon: <AppstoreOutlined />,
-    label: <Link to="/group-student">Group student</Link>,
+    label: <Link to="/teacher/group-student">Group student</Link>,
   },
   {
-    key: "/teacher-group",
+    key: "/teacher/teacher-group",
     icon: <TeamOutlined />,
-    label: <Link to="/teacher-group">Teacher group</Link>,
+    label: <Link to="/teacher/teacher-group">Teacher group</Link>,
   },
   // {
   //   key: "/#",
@@ -55,14 +54,9 @@ const Teacher: React.FC = () => {
 
   const userMenuItems: MenuProps["items"] = [
     {
-      key: "profile",
+      key: "/teacher/profile",
       icon: <UserOutlined />,
-      label: "Profile",
-    },
-    {
-      key: "settings",
-      icon: <SettingOutlined />,
-      label: "Settings",
+      label: <Link to="/teacher/profile">Profile</Link>,
     },
     {
       type: "divider" as const,
@@ -108,7 +102,7 @@ const Teacher: React.FC = () => {
             color: "white",
           }}
         >
-          {collapsed ? "AP" : "Teacher Panel"}
+          {collapsed ? "TP" : "Teacher Panel"}
         </div>
         <Menu
           theme="dark"
