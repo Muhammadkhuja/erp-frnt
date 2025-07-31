@@ -1,13 +1,5 @@
 import React from "react";
-import {
-  Modal,
-  Input,
-  Form as AntForm,
-  Button,
-  Select,
-  Spin,
-  message,
-} from "antd";
+import { Modal, Input, Form as AntForm, Button, Select, Spin } from "antd";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import type { Branch, Teacher } from "@types";
 import { MaskedInput } from "antd-mask-input";
@@ -48,21 +40,24 @@ const TeacherModal: React.FC<TeacherModalProps> = ({
 
   const handleSubmit = async (values: Teacher) => {
     const { password, ...rest } = values;
-
     const payload: any = {
       ...rest,
-      ...(editData ? {} : { password }),
+      ...(isEdit ? {} : { password }),
     };
+
+    console.log("Submitting form:", payload);
+
     try {
-      if (editData && editData.id != null) {
+      if (isEdit && editData?.id) {
+        console.log("Calling updateFn");
         updateFn({ model: payload, id: editData.id });
       } else {
+        console.log("Calling createFn");
         createFn(payload);
       }
       onClose();
     } catch (error) {
-      console.error(error);
-      message.error("An error occurred while saving.");
+      console.error("Submission error:", error);
     }
   };
 
@@ -84,8 +79,8 @@ const TeacherModal: React.FC<TeacherModalProps> = ({
           validationSchema={TeacherValidation(isEdit)}
           onSubmit={handleSubmit}
         >
-          {({ setFieldValue }) => (
-            <Form>
+          {({ setFieldValue, handleSubmit }) => (
+            <Form onSubmit={handleSubmit}>
               <AntForm.Item label="First Name" labelCol={{ span: 24 }}>
                 <Field
                   as={Input}
@@ -191,7 +186,7 @@ const TeacherModal: React.FC<TeacherModalProps> = ({
               </AntForm.Item>
 
               <Button type="primary" htmlType="submit" block>
-                {mode === "update" ? "update" : "create"}
+                {isEdit ? "Update" : "Create"}
               </Button>
             </Form>
           )}

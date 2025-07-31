@@ -9,7 +9,6 @@ import {
   SignIn,
   SignUp,
   AdminLayout,
-  TeacherLayout,
   StudentLayout,
   Course,
   ProtectChildrem,
@@ -22,6 +21,8 @@ import {
   Room,
   Reducer,
   StarryNight,
+  Teachers,
+  TeacherLayout,
 } from "@pages";
 const App = lazy(() => import("../App"));
 
@@ -51,11 +52,19 @@ const Router = () => {
           <Route path="courses" element={<Course />} />
           <Route path="branches" element={<Branch />} />
           <Route path="student" element={<StudentLayout />}></Route>
-          <Route path="teacher" element={<TeacherLayout />}></Route>
+          <Route path="teacher" element={<Teachers />}></Route>
           <Route path="group/:id" element={<SingleGroup />}></Route>
           <Route path="rooms" element={<Room />}></Route>
           <Route path="reducer" element={<Reducer />}></Route>
         </Route>
+
+        <Route path="teacher/" element={<TeacherLayout />}>
+          {/* <Route path="/group-student" element={<GroupStudent />} /> */}
+          {/* <Route path="/teacher-group" element={<TeacherGroup />} /> */}
+        </Route>
+
+
+
         <Route path="nightt" element={<StarryNight />}></Route>
         <Route path="worker" element={<Worker />}></Route>
         <Route path="*" element={<Notfoun />}></Route>

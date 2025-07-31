@@ -3,7 +3,7 @@ import { lazy } from "react";
 const SignIn = lazy(() => import("./auth/sign-in"));
 const SignUp = lazy(() => import("./auth/sign-up"));
 const AdminLayout = lazy(() => import("./admin-layout/admin"));
-const TeacherLayout = lazy(() => import("./teacher-layout/teacher"));
+const Teachers = lazy(() => import("./teacher-layout/teachers"));
 const StudentLayout = lazy(() => import("./student-layout/student"));
 const Groups = lazy(() => import("./groups/group"));
 const Course = lazy(() => import("./courses/courses"));
@@ -17,12 +17,15 @@ const SingleGroup = lazy(() => import("./groups/single-group"));
 const Notfoun = lazy(() => import("./not-found/notfound"));
 const Room = lazy(() => import("./rooms/room"));
 const StarryNight = lazy(() => import("./night/night"));
+const TeacherLayout = lazy(() => import("./teacher-layout/teacher-layout"));
+const GroupStudent = lazy(() => import("./teacher-group/group-students"));
+const TeacherGroup = lazy(() => import("./teacher-group/teacher-groups"));
 
 export {
   SignIn,
   SignUp,
   AdminLayout,
-  TeacherLayout,
+  Teachers,
   StudentLayout,
   Groups,
   Course,
@@ -30,10 +33,13 @@ export {
   ProtectChildrem,
   LoginChildren,
   Branch,
-  Worker,
   SingleGroup,
   Notfoun,
   Room,
+  TeacherLayout,
+  GroupStudent,
+  TeacherGroup,
+  Worker,
   Reducer,
   StarryNight,
 };

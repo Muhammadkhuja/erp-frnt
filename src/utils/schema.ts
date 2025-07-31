@@ -70,7 +70,6 @@ export const StudentValidation = (isEdit: boolean) =>
         }),
   });
 
-//-Taecher--
 export const TeacherValidation = (isEdit: boolean) =>
   Yup.object({
     first_name: Yup.string().required("First name is required"),
@@ -80,6 +79,10 @@ export const TeacherValidation = (isEdit: boolean) =>
       .required("Email is required"),
     phone: Yup.string().required("Phone number is required"),
     role: Yup.string().required("Role is required"),
+    branchId: Yup.array()
+      .of(Yup.number().required()) // Validate as numbers
+      .min(1, "At least one branch is required")
+      .required("Branches are required"),
     ...(isEdit
       ? {}
       : {
@@ -87,15 +90,10 @@ export const TeacherValidation = (isEdit: boolean) =>
             .min(6, "Password must be at least 6 characters")
             .required("Password is required"),
         }),
-
-    branches: Yup.array()
-      .of(
-        Yup.object({
-          id: Yup.number().required(),
-        })
-      )
-      .required("Branches are required"),
   });
+
+
+
 
 //--Sign-In--
 export const SignInValidation = Yup.object().shape({
