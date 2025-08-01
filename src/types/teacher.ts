@@ -1,15 +1,15 @@
 export interface Teacher {
-  id?:number;
+  id?: number;
   first_name: string;
   last_name: string;
   email: string;
   password?: string;
   phone: string;
   role: string;
+  avatar_url?: string;
+  is_active?: boolean;
   branchId: number[];
-  branches?: [
-    id:number
-  ] 
+  branches?: [id: number];
 }
 
 export interface GroupTeachers1 {

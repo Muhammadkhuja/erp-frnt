@@ -3,19 +3,10 @@ import { Button, Card, Avatar, Tag, Typography, Empty } from "antd";
 import { UserOutlined, PlusOutlined } from "@ant-design/icons";
 import { useTeachers } from "@hooks";
 import AddTeacherToGroupModal from "./teacher-add";
+import type { Teacher } from "@types";
 
 const { Title, Text } = Typography;
 
-interface Teacher {
-  id: string;
-  first_name: string;
-  last_name: string;
-  avatar_url?: string;
-  role: string;
-  is_active: boolean;
-  email: string;
-  phone: string;
-}
 
 interface GroupTeacher {
   teacher: Teacher;
@@ -68,7 +59,7 @@ const GroupTeachers: React.FC<GroupTeachersProps> = ({ teachers, groupId }) => {
         key={teacher.id}
         hoverable
         style={{
-          marginBottom: 16,
+          marginBottom: 10,
           borderRadius: 12,
           border: "1px solid #f0f0f0",
           boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
@@ -113,7 +104,7 @@ const GroupTeachers: React.FC<GroupTeachersProps> = ({ teachers, groupId }) => {
             </div>
 
             <div style={{ flex: 1 }}>
-              <div style={{ marginBottom: 6 }}>
+              <div style={{ marginBottom: 1 }}>
                 <Text strong style={{ fontSize: 18, color: "#262626" }}>
                   {fullName}
                 </Text>
@@ -123,7 +114,7 @@ const GroupTeachers: React.FC<GroupTeachersProps> = ({ teachers, groupId }) => {
                 style={{
                   display: "flex",
                   alignItems: "center",
-                  gap: 8,
+                  gap: 1,
                   marginBottom: 6,
                 }}
               >
@@ -140,7 +131,7 @@ const GroupTeachers: React.FC<GroupTeachersProps> = ({ teachers, groupId }) => {
                 >
                   {teacher.role}
                 </Tag>
-                <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 1 }}>
                   <Text type="secondary" style={{ fontSize: 13 }}>
                     <span style={{ fontWeight: 500 }}>ID:</span> {teacher.id}
                   </Text>
@@ -179,7 +170,7 @@ const GroupTeachers: React.FC<GroupTeachersProps> = ({ teachers, groupId }) => {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          marginBottom: 24,
+          marginBottom: 2,
         }}
       >
         <Title level={3} style={{ margin: 0 }}>

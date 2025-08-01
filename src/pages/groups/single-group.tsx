@@ -67,7 +67,7 @@ const SingleGroup = () => {
     >
       <Card style={{ marginBottom: "24px", padding: "32px"  }}>
         <Row gutter={[24, 24]}>
-          <Col xs={24} lg={24} className="helllooo">
+          <Col xs={24} lg={24} >
             <Card
               style={{
                 height: "100%",

@@ -8,6 +8,8 @@ export interface Student {
   confirm_password?: string;
   gender: string;
   date_of_birth: string;
+  status?: string;
+  role?: string;
   // lidId?: number;
   // eventsId: number[],
   // groupsId: number[]

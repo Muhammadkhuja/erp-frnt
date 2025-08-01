@@ -8,19 +8,10 @@ import {
 } from "@ant-design/icons";
 import AddStudentToGroupModal from "./student-add";
 import { useStudent } from "@hooks";
+import type { Student } from "@types";
 
 const { Panel } = Collapse;
 const { Text } = Typography;
-
-interface Student {
-  id: string;
-  first_name: string;
-  last_name: string;
-  phone: string;
-  email: string;
-  status?: string;
-  role?: string;
-}
 
 interface GroupStudent {
   student: Student;
@@ -84,7 +75,7 @@ const GroupStudents: React.FC<GroupStudentsProps> = ({ students, groupId }) => {
 
           return (
             <Panel
-              key={student.id}
+              key={student.id!}
               header={
                 <div
                   style={{
