@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  Modal,
-  Input,
-  Form as AntForm,
-  Button,
-  Select,
-  Spin,
-} from "antd";
+import { Modal, Input, Form as AntForm, Button, Select, Spin } from "antd";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import type { Branch, Teacher } from "@types";
 import { MaskedInput } from "antd-mask-input";
@@ -31,9 +24,7 @@ const TeacherModal: React.FC<TeacherModalProps> = ({
 
   const { data: branchData, isLoading } = useBranch();
   const branches: Branch[] = branchData?.data?.branch || [];
-const { useCreateTeacher, useUpdateTeacher } = useTeachers();
-
-
+  const { useCreateTeacher, useUpdateTeacher } = useTeachers();
 
   const initialValues: Teacher = {
     first_name: editData?.first_name || "",
@@ -46,23 +37,23 @@ const { useCreateTeacher, useUpdateTeacher } = useTeachers();
   };
 
   const handleSubmit = async (values: Teacher) => {
-  const { password, ...rest } = values;
-  const payload: any = {
-    ...rest,
-    ...(isEdit ? {} : { password }),
-  };
+    const { password, ...rest } = values;
+    const payload: any = {
+      ...rest,
+      ...(isEdit ? {} : { password }),
+    };
 
-  try {
-    if (isEdit && editData?.id) {
-      useUpdateTeacher.mutate({ model: payload, id: editData.id }); // ✅
-    } else {
-      useCreateTeacher.mutate(payload); // ✅
+    try {
+      if (isEdit && editData?.id) {
+        useUpdateTeacher.mutate({ model: payload, id: editData.id });
+      } else {
+        useCreateTeacher.mutate(payload);
+      }
+      onClose();
+    } catch (error) {
+      console.error("Submission error:", error);
     }
-    onClose();
-  } catch (error) {
-    console.error("Submission error:", error);
-  }
-};
+  };
 
   return (
     <Modal

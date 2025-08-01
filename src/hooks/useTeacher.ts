@@ -4,27 +4,24 @@ import { TeacherService } from "../service/teacher.service";
 export const useTeachers = (params?: any, id?: number) => {
   const queryClient = useQueryClient();
 
-  // 1. Teacher ma'lumotlarini olish
   const { data } = useQuery({
     enabled: !!params,
     queryKey: ["teacher", params],
     queryFn: () => TeacherService.getTeachers(params),
   });
 
-  // 2. Teacher'ga biriktirilgan guruhlar ro'yxatini olish
   const {
     data: teacherGroupsData,
     isLoading: isLoadingGroups,
     isError: isGroupsError,
   } = useQuery({
-    enabled: id === undefined, // id bo'lmasa, teacherGroups olib kelinadi
+    enabled: id === undefined,
     queryKey: ["teacher-groups"],
     queryFn: () => TeacherService.getTeacherGroups(),
   });
 
   const teacherGroups = teacherGroupsData?.data || [];
 
-  // 3. Teacher guruhining studentlarini olish
   const {
     data: groupStudentsData,
     isLoading: isLoadingStudents,
@@ -35,7 +32,6 @@ export const useTeachers = (params?: any, id?: number) => {
     queryFn: () => TeacherService.getTeacherGroupById(id!),
   });
 
-  // 4. Teacher yaratish
   const useTeacherCreate = () => {
     return useMutation({
       mutationFn: (data: any) => TeacherService.createTeacher(data),
@@ -45,7 +41,6 @@ export const useTeachers = (params?: any, id?: number) => {
     });
   };
 
-  // 5. Teacher yangilash
   const useTeacherUpdate = () => {
     return useMutation({
       mutationFn: ({ id, model }: { id: number; model: any }) =>
@@ -56,7 +51,6 @@ export const useTeachers = (params?: any, id?: number) => {
     });
   };
 
-  // 6. Teacher o‘chirish
   const useDeleteTeacher = () => {
     return useMutation({
       mutationFn: (id: number) => TeacherService.deleteTeacher(id),
@@ -73,7 +67,7 @@ return {
   isGroupsError,
   isLoadingStudents,
   isStudentsError,
-  useCreateTeacher: useTeacherCreate(), // hookni ichida chaqirdik
+  useCreateTeacher: useTeacherCreate(),
   useUpdateTeacher: useTeacherUpdate(),
   useDeleteTeacher: useDeleteTeacher(),
 };

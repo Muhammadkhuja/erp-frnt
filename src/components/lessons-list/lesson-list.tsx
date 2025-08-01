@@ -92,7 +92,6 @@ function LessonLists({ lessons }: any) {
     }
   };
 
-  // ✅ Status bo‘yicha hisob-kitob
   const statusCounts = useMemo(() => {
     return lessons.reduce(
       (acc: any, lesson: any) => {

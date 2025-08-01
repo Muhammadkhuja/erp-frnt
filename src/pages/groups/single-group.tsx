@@ -35,7 +35,6 @@ const SingleGroup = () => {
         },
       };
 
-  // Status ranglarini xaritalash
   const getStatusColor = (status: string) => {
     switch (status) {
       case "new":

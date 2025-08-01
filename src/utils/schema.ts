@@ -80,7 +80,7 @@ export const TeacherValidation = (isEdit: boolean) =>
     phone: Yup.string().required("Phone number is required"),
     role: Yup.string().required("Role is required"),
     branchId: Yup.array()
-      .of(Yup.number().required()) // Validate as numbers
+      .of(Yup.number().required())
       .min(1, "At least one branch is required")
       .required("Branches are required"),
     ...(isEdit
@@ -91,9 +91,6 @@ export const TeacherValidation = (isEdit: boolean) =>
             .required("Password is required"),
         }),
   });
-
-
-
 
 //--Sign-In--
 export const SignInValidation = Yup.object().shape({

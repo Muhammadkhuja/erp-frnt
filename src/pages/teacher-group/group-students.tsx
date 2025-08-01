@@ -29,7 +29,6 @@ const TeacherGroupStudents = () => {
 
   const submit = () => {
     console.log(studentss, "Submitted students");
-    // bu yerga API chaqiruv yoki post logikasi yoziladi
   };
 
   const columns = [
