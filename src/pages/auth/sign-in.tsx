@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { setItem } from "@helpers";
 import { Button, Card, Input, Select, message, Typography } from "antd";
 import { Formik, Form, Field, ErrorMessage } from "formik";
@@ -93,10 +93,28 @@ const SignIn = () => {
                 <div style={{ color: "red", fontSize: 12 }}>{errors.role}</div>
               )}
             </div>
-
-            <Button type="primary" htmlType="submit" block loading={isPending}>
-              Sign In
-            </Button>
+            <div
+              style={{ display: "flex", flexDirection: "column", gap: "10px" }}
+            >
+              <Button
+                type="primary"
+                htmlType="submit"
+                block
+                loading={isPending}
+              >
+                Sign In
+              </Button>
+              <Link
+                to={"forgot-password"}
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                Forgot Password ?
+              </Link>
+            </div>
           </Form>
         )}
       </Formik>

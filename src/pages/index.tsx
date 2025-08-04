@@ -1,6 +1,7 @@
 import { lazy } from "react";
 
 const SignIn = lazy(() => import("./auth/sign-in"));
+const ForgotPassword = lazy(() => import("./auth/forgot-password"));
 const SignUp = lazy(() => import("./auth/sign-up"));
 const AdminLayout = lazy(() => import("./admin-layout/admin"));
 const Teachers = lazy(() => import("./teacher-layout/teachers"));
@@ -31,6 +32,7 @@ const StarryNight = lazy(() => import("./night/night"));
 
 export {
   SignIn,
+  ForgotPassword,
   SignUp,
   AdminLayout,
   Teachers,

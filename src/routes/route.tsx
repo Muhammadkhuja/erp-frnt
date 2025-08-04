@@ -27,6 +27,7 @@ import {
   GroupStudent,
   TeacherGroups,
   TeacherProfile,
+  ForgotPassword,
 } from "@pages";
 const App = lazy(() => import("../App"));
 
@@ -43,6 +44,7 @@ const Router = () => {
           }
         />
         <Route path="sign-up" element={<SignUp />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route
           path="admin/"
           element={
